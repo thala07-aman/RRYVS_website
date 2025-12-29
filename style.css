@@ -398,3 +398,149 @@ padding-bottom: 18px;
 padding-top: 18px;
 padding-bottom: 18px;
 }
+
+@media (max-width: 768px) {
+
+  /* Header */
+  header {
+    padding: 0 16px;
+  }
+
+  .logo span {
+    display: none; /* hide long company name */
+  }
+
+  nav {
+    display: none; /* we’ll replace with menu later */
+  }
+
+  /* Sections */
+  section {
+    padding: 24px 16px;
+  }
+
+  /* Headings */
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  /* Home hero */
+  .home-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .home-hero-visual {
+    grid-template-columns: 1fr;
+  }
+
+  /* Page cover */
+  .page-cover img {
+    height: 220px;
+  }
+
+  .page-cover-text {
+    padding: 40px 16px;
+  }
+
+  /* Cards */
+  .card {
+    padding: 20px;
+  }
+
+  /* Buttons */
+  .btn {
+    padding: 12px 20px;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .home-hero {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+a, button {
+  min-height: 44px; /* Apple guideline */
+}
+
+/* =========================
+   MOBILE NAVIGATION
+========================= */
+
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dark);
+}
+
+/* Desktop nav stays normal */
+.nav-menu {
+  display: flex;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+
+  body {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  h1 {
+    font-size: 28px;
+    line-height: 1.3;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 15px;
+  }
+
+  .logo span {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    background: white;
+    flex-direction: column;
+    display: none;
+    padding: 16px 0;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+  }
+
+  .nav-menu a {
+    padding: 14px 20px;
+    margin: 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+}
+
