@@ -37,3 +37,18 @@ const revealOnScroll = () => {
 
 window.addEventListener("scroll", revealOnScroll);
 window.addEventListener("load", revealOnScroll);
+
+// Mobile menu toggle
+const toggleBtn = document.querySelector(".menu-toggle");
+const navMenu = document.querySelector(".nav-menu");
+
+toggleBtn.addEventListener("click", () => {
+  navMenu.classList.toggle("open");
+});
+
+// Close menu on link click
+document.querySelectorAll(".nav-menu a").forEach(link => {
+  link.addEventListener("click", () => {
+    navMenu.classList.remove("open");
+  });
+});
