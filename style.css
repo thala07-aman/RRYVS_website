@@ -1,3 +1,6 @@
+/* =========================
+   ROOT VARIABLES
+========================= */
 :root {
   --primary: #005ea6;
   --secondary: #0ea5e9;
@@ -5,41 +8,82 @@
   --light: #f8fafc;
 }
 
+/* =========================
+   GLOBAL RESET
+========================= */
 * {
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  padding-top: 72px;   /* matches header height */
+  padding-top: 72px;              /* space for fixed header */
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;    /* 🔒 prevent vertical centering */
+  align-items: stretch;
+
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--dark);
   background: white;
+  position: relative;
 }
 
+/* Image safety */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
+/* =========================
+   WATERMARK
+========================= */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("logo.png"); /* change path if needed */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 400px;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
 
-/* Header */
+/* =========================
+   HEADER
+========================= */
 header {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  height: 72px;              /* IMPORTANT */
+  height: 72px;
   background: white;
-  padding: 0 40px;           /* vertical padding removed */
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 100;
+
+  padding: 0 40px;
+  z-index: 1000;
   transition: box-shadow 0.3s ease;
 }
 
+header.scrolled {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
 
+/* Logo */
 .logo {
   display: flex;
   align-items: center;
@@ -47,22 +91,19 @@ header {
 }
 
 .logo img {
-  height: 80px;              /* hard limit */
-  max-height: 80px;
+  height: 80px;
   width: auto;
   object-fit: contain;
 }
 
-header.scrolled {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-}
-
-header h1 {
-  margin: 0;
-  font-size: 20px;
+.logo span {
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 600;
   color: var(--primary);
 }
 
+/* Navigation */
 nav a {
   margin-left: 20px;
   text-decoration: none;
@@ -75,9 +116,30 @@ nav a:hover {
   color: var(--primary);
 }
 
-/* Hero */
+/* =========================
+   MAIN LAYOUT
+========================= */
+main {
+  flex: 1;              /* pushes footer down */
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+section {
+  padding: 40px;
+  max-width: 1100px;
+  margin: 0 auto;       /* horizontal centering ONLY */
+}
+
+/* =========================
+   HERO SECTION
+========================= */
 .hero {
-  padding: 160px 40px 120px;
+  padding: 120px 40px;
   background: linear-gradient(135deg, #005ea6, #003f6b);
   color: white;
 }
@@ -92,7 +154,9 @@ nav a:hover {
   font-size: 18px;
 }
 
-/* Buttons */
+/* =========================
+   BUTTONS
+========================= */
 .buttons {
   margin-top: 32px;
 }
@@ -119,14 +183,9 @@ nav a:hover {
   box-shadow: 0 12px 24px rgba(0,0,0,0.15);
 }
 
-/* Sections */
-section {
-  padding: 100px 40px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-/* Cards */
+/* =========================
+   GRID / CARDS
+========================= */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -144,7 +203,9 @@ section {
   transform: translateY(-6px);
 }
 
-/* Lists */
+/* =========================
+   LISTS
+========================= */
 ul {
   padding-left: 20px;
 }
@@ -153,15 +214,22 @@ li {
   margin-bottom: 10px;
 }
 
-/* Footer */
+/* =========================
+   FOOTER
+========================= */
 footer {
   background: #020617;
   color: #cbd5f5;
   text-align: center;
   padding: 40px;
+  position: relative;
+  z-index: 1;
+  margin-top: auto;     /* sticky footer behavior */
 }
 
-/* Scroll reveal */
+/* =========================
+   SCROLL REVEAL ANIMATION
+========================= */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -173,9 +241,160 @@ footer {
   transform: translateY(0);
 }
 
-.logo span {
-  margin-left: 10px;
+/* =========================
+   HOME PAGE STYLES
+========================= */
+
+.home-hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.home-hero h1 {
+  font-size: 42px;
+  margin-bottom: 16px;
+}
+
+.home-hero-text p {
+  max-width: 520px;
   font-size: 18px;
-  font-weight: 600;
+}
+
+.home-hero-visual {
+  display: grid;
+  gap: 20px;
+}
+
+.visual-box {
+  padding: 32px;
+  border-radius: 18px;
+  color: white;
+}
+
+.visual-box.water {
+  background: linear-gradient(135deg, #0ea5e9, #005ea6);
+}
+
+.visual-box.spices {
+  background: linear-gradient(135deg, #8b5e34, #5a3b1f);
+}
+
+.vertical-card {
+  text-decoration: none;
+  color: inherit;
+}
+
+.vertical-card span {
+  display: inline-block;
+  margin-top: 12px;
   color: var(--primary);
+  font-weight: 600;
+}
+
+/* Trust strip */
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* =========================
+   HOME PAGE SPACING TUNING
+========================= */
+
+/* Home page cover header */
+.home-header {
+  background: linear-gradient(135deg, var(--primary), #003f6b);
+  border-radius: 16px;
+}
+
+.home-header .page-cover-text {
+  position: static;
+  padding: 90px 40px 70px;
+  color: white;
+  text-align: center;
+}
+
+.home-header h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.home section {
+padding-top: 18px;
+padding-bottom: 18px;
+}
+
+
+/* Page cover (Quality & Contact) */
+.page-cover {
+  position: relative;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.page-cover img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.page-cover-text {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  border-radius: 16px;
+}
+
+.page-cover-text h1 {
+  font-size: 36px;
+}
+
+/* Quality grid images */
+.quality-grid img {
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.contact-form-card {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-form-card p {
+  margin-bottom: 24px;
+}
+
+.quality section {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.spices section {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+
+.water section {
+ padding-top: 18px;
+ padding-bottom: 18px;
+}
+
+.about section {
+padding-top: 18px;
+padding-bottom: 18px;
 }
